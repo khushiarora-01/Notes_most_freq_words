@@ -1,0 +1,54 @@
+# "The quick brown fox jumps over the lazy dog"
+# "Pack my box with five dozen liquor jugs"
+
+
+'''Question: You are given a list of strings lines, where each element in the list represents a line from a text file.
+Write a function get_most_frequent_word(lines) that returns the most frequent word in the list, ignoring case and punctuation.
+If the list is empty or contains no valid words, return an appropriate message.
+
+Input:
+lines = [
+    "The quick brown fox jumps over the lazy dog.",
+    "The quick brown fox is quick.",
+    "Lazy dogs are not quick."
+]'''
+
+# Returns the most frequent word among a list of lines
+def get_most_frequent_word(lines):
+  if not lines:
+    return "There are no lines"
+
+  word_frequency = {} # represents an empty dictionary
+  for line in lines:
+    cleaned_line = ''.join(char.lower() if char.isalnum() or char.isspace() else ' ' for char in line)# Denoting to convert alphanumeric character to lower
+    words = cleaned_line.split()
+
+    for word in words:# Dictonary is used here (keys:values)
+      if word in word_frequency:
+        word_frequency[word] += 1
+      else:
+        word_frequency[word] = 1
+
+  if not word_frequency:# Ager empty ajata hai toh
+    return "No valid words found"
+
+  most_frequent_word = ''
+  max_frequency = 0
+
+  for word, frequency in word_frequency.items():# Loop to iterate over the key value.
+    if frequency > max_frequency:
+      most_frequent_word = word
+      max_frequency = frequency
+
+  return most_frequent_word
+
+#Input
+lines = [
+    "The quick brown fox jumps over the lazy dog.",
+    "The quick brown fox is quick.",
+    "Lazy dogs are not quick."
+]
+
+get_most_frequent_word(lines)
+
+
